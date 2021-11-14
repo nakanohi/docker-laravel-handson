@@ -30,7 +30,7 @@ final class PointEvent
         $this->customerId = $customerId;
         $this->event = $event;
         $this->point = $point;
-        $this->createdAt = $createdAt;
+         $this->createdAt = $createdAt;
     }
 
     /**
