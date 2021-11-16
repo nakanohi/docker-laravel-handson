@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="KaoCustomRule">
+    <description>Kaonavi Custom Rule</description>
+
+    <rule ref="phpcs/DeprecatedFacadeRule/rule.xml" />
+    <rule ref="phpcs/DeprecatedHelperRule/rule.xml" />
+    <rule ref="phpcs/DeprecatedClassUseRule/rule.xml" />
+
+    <exclude-pattern>*/*SniffTest\.php$</exclude-pattern>
+</ruleset>

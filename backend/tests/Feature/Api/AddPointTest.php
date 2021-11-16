@@ -22,13 +22,17 @@ class AddPointTest extends TestCase
         Carbon::setTestNow();
 
         // (2) テストに必要なレコードを登録
-        factory(EloquentCustomer::class)->create([
+        factory(EloquentCustomer::class)->create(
+            [
             'id' => self::CUSTOMER_ID,
-        ]);
-        factory(EloquentCustomerPoint::class)->create([
+            ]
+        );
+        factory(EloquentCustomerPoint::class)->create(
+            [
             'customer_id' => self::CUSTOMER_ID,
             'point'       => 100,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -37,10 +41,12 @@ class AddPointTest extends TestCase
     public function put_add_point()
     {
         // (3) API実行
-        $response = $this->putJson('/api/customers/add_point', [
+        $response = $this->putJson(
+            '/api/customers/add_point', [
             'customer_id' => self::CUSTOMER_ID,
             'add_point'   => 10,
-        ]);
+            ]
+        );
 
         // (4) HTTPレスポンスアサーション
         $response->assertStatus(200);
@@ -48,16 +54,20 @@ class AddPointTest extends TestCase
         $response->assertExactJson($expected);
 
         // (5) データベースアサーション
-        $this->assertDatabaseHas('customer_points', [
+        $this->assertDatabaseHas(
+            'customer_points', [
             'customer_id' => self::CUSTOMER_ID,
             'point'       => 110,
-        ]);
-        $this->assertDatabaseHas('customer_point_events', [
+            ]
+        );
+        $this->assertDatabaseHas(
+            'customer_point_events', [
             'customer_id' => self::CUSTOMER_ID,
             'event'       => 'ADD_POINT',
             'point'       => 10,
             'created_at'  => Carbon::now(),
-        ]);
+            ]
+        );
     }
 
     /**
@@ -66,8 +76,10 @@ class AddPointTest extends TestCase
     public function put_add_point_バリデーションエラー()
     {
         // (2) API実行
-        $response = $this->putJson('/api/customers/add_point', [
-        ]);
+        $response = $this->putJson(
+            '/api/customers/add_point', [
+            ]
+        );
 
         // (3) HTTPレスポンスアサーション
         $response->assertStatus(422);
@@ -90,8 +102,10 @@ class AddPointTest extends TestCase
      */
     public function put_add_point_バリデーションエラー_errorsのみ検証()
     {
-        $response = $this->putJson('/api/customers/add_point', [
-        ]);
+        $response = $this->putJson(
+            '/api/customers/add_point', [
+            ]
+        );
 
         $response->assertStatus(422);
 
@@ -114,8 +128,10 @@ class AddPointTest extends TestCase
      */
     public function put_add_point_バリデーションエラー_キーのみ検証()
     {
-        $response = $this->putJson('/api/customers/add_point', [
-        ]);
+        $response = $this->putJson(
+            '/api/customers/add_point', [
+            ]
+        );
 
         $response->assertStatus(422);
 
@@ -135,10 +151,12 @@ class AddPointTest extends TestCase
     public function put_add_point_バリデーションエラー_customer_id()
     {
         // (2) API実行
-        $response = $this->putJson('/api/customers/add_point', [
+        $response = $this->putJson(
+            '/api/customers/add_point', [
             'customer_id' => 'a',
             'add_point'   => 10,
-        ]);
+            ]
+        );
 
         // (3) HTTPレスポンスアサーション
         $response->assertStatus(422);
@@ -159,10 +177,12 @@ class AddPointTest extends TestCase
     public function put_add_point_customer_id事前条件エラー()
     {
         // (1) API実行
-        $response = $this->putJson('/api/customers/add_point', [
+        $response = $this->putJson(
+            '/api/customers/add_point', [
             'customer_id' => 999,
             'add_point'   => 10,
-        ]);
+            ]
+        );
 
         // (2) HTTPレスポンスアサーション
         $response->assertStatus(400);
@@ -179,10 +199,12 @@ class AddPointTest extends TestCase
     public function put_add_point_add_point事前条件エラー(int $addPoint)
     {
         // (1) API実行
-        $response = $this->putJson('/api/customers/add_point', [
+        $response = $this->putJson(
+            '/api/customers/add_point', [
             'customer_id' => self::CUSTOMER_ID,
             'add_point'   => $addPoint,
-        ]);
+            ]
+        );
 
         // (2) HTTPレスポンスアサーション
         $response->assertStatus(400);

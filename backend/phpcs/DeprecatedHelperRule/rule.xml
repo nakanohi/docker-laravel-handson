@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="DeprecatedHelperRule">
+    <description>Deprecated Helper Rule</description>
+    <!-- config配下はhelper関数のチェックを行わない -->
+    <exclude-pattern>*/config/*\.php$</exclude-pattern>
+    <exclude-pattern>*/database/*\.php$</exclude-pattern>
+</ruleset>
