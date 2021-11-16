@@ -1,0 +1,15 @@
+# PHP-FPMのイメージをベースに構築する
+FROM php:8.0
+
+# cronインストール
+RUN apt-get update && \
+    apt-get install -y cron
+
+# cron設定を配置する
+COPY ./test /etc/cron.d
+
+# ログを標準出力へ出力できるようにシンボリックリンクを作成する
+RUN chmod 0644 /etc/cron.d && ln -sf /proc/1/fd/1 /var/log/cron.log
+
+# フォアグラウンドでcronを起動する
+CMD cron -f
