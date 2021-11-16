@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="DeprecatedUseRule">
+    <description>Deprecated Use Rule</description>
+
+    <!-- To use 'Symfony\Component\HttpFoundation\Response' -->
+    <exclude-pattern>*/app/Http/Middleware/EncryptCookies.php$</exclude-pattern>
+</ruleset>
