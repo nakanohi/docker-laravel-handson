@@ -104,7 +104,12 @@ return [
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
         ],
-
+        'batch' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/batch.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,

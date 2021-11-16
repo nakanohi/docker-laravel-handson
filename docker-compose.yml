@@ -13,7 +13,12 @@ services:
       - ./backend:/work
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
-
+  cron:
+    build: ./infra/cron
+    volumes:
+      - ./backend:/work
+    depends_on:
+      - app
   # 追記
   db:
     build: ./infra/mysql
